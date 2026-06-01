@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "record:video": "node scripts/record_submission_video.mjs",
+    "record:video:task2": "node scripts/record_task2_video.mjs"
   },
   "dependencies": {
     "react": "^19.2.6",

@@ -24,6 +24,16 @@ npm run test
 npm run test:e2e
 ```
 
+## Record submission video (optional)
+
+Automated Playwright walkthrough with on-screen captions (no microphone). Uses `../perf_data/` xlsx files; saves to your Desktop:
+
+```bash
+npm run record:video
+```
+
+Outputs: `~/Desktop/task1-submission-demo.mp4` and `.webm` (~3–4 min, within the 5 min rubric).
+
 ## Deploy (GitHub Pages)
 
 Automated from the repo root via GitHub Actions. Live URL:

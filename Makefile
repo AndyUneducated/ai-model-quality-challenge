@@ -12,3 +12,6 @@ test-task2:
 artifacts:
 	python3 -m evalscope_ext.tools.generate_artifacts
 	python3 scripts/build_scorecard.py
+
+record-task2-video:
+	cd task1-ui && npm run record:video:task2

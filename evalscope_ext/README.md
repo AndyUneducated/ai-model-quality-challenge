@@ -22,6 +22,17 @@ python3 -m evalscope_ext.probe.mmmu_encoder_probe
 pytest evalscope_ext/tests/
 ```
 
+## Record walkthrough video (optional)
+
+Automated slide walkthrough with captions (no microphone):
+
+```bash
+make record-task2-video
+# or: cd task1-ui && npm run record:video:task2
+```
+
+Output: `~/Desktop/task2-submission-demo.mp4`
+
 ## Registered pruned datasets
 
 - `live_code_bench_pruned`
