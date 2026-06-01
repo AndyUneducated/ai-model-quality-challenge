@@ -24,14 +24,13 @@ npm run test
 npm run test:e2e
 ```
 
-## Deploy (Vercel)
+## Deploy (GitHub Pages)
 
-1. Import this repo in Vercel.
-2. Set root directory to `task1-ui`.
-3. Build command: `npm run build`
-4. Output directory: `dist`
+Automated from the repo root via GitHub Actions. Live URL:
 
-After deployment, paste the live URL into the root README and submission form.
+`https://andyuneducated.github.io/ai-model-quality-challenge/`
+
+See [docs/DEPLOY_TASK1.md](../docs/DEPLOY_TASK1.md).
 
 ## Architecture
 

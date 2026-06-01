@@ -7,7 +7,7 @@ This document maps official hard requirements and forbidden baselines to impleme
 | ID | Requirement | Implementation | Test / Evidence |
 |---|---|---|---|
 | T1-H1 | Documented launch from clean clone | Root `README.md`, `task1-ui/README.md` | `cd task1-ui && npm ci && npm run dev` |
-| T1-H2 | Public live deployed URL | Vercel deployment (URL in root README) | Live URL + screenshot in `artifacts/task1/` |
+| T1-H2 | Public live deployed URL | GitHub Pages (URL in root README) | Live URL + screenshot in `artifacts/task1/` |
 | T1-H3 | Upload one or many `.xlsx` sweeps without rebuild | `task1-ui/src/lib/parseSweep.ts`, `UploadPanel.tsx` | Vitest + Playwright e2e |
 | T1-H4 | Side-by-side comparison across uploaded models | `ComparisonView.tsx`, default compare mode | E2E multi-upload test |
 | T1-H5 | Works for unseen `Model L` with zero code edits | Dynamic filename + column mapping in `parseSweep.ts` | Unit test `parseSweep.test.ts` |

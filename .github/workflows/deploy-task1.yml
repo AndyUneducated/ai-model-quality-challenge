@@ -3,9 +3,6 @@ name: Deploy Task1 UI
 on:
   push:
     branches: [main]
-    paths:
-      - 'task1-ui/**'
-      - '.github/workflows/deploy-task1.yml'
   workflow_dispatch:
 
 permissions:

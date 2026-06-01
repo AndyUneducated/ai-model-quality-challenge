@@ -4,7 +4,7 @@
 
 | Decision | Chosen | Ruled out | Why |
 |---|---|---|---|
-| Frontend stack | React + Vite + TypeScript | Streamlit / Gradio | Pure browser parsing, zero backend, easy Vercel deploy, clean upload contract |
+| Frontend stack | React + Vite + TypeScript | Streamlit / Gradio | Pure browser parsing, zero backend, static GitHub Pages deploy, clean upload contract |
 | Parsing location | Client-side Web parsing | Server upload API | Avoid rebuild/deploy for new sweeps; satisfies "upload without code changes" |
 | Primary layout | Comparison-first | Single-model detail page | Spec says multi-upload comparison is common case |
 | Validation | zod + alias-based column map | Hard-coded per-model views | Supports unseen Model L and column drift |
@@ -23,4 +23,4 @@
 
 | Decision | Chosen | Ruled out | Why |
 |---|---|---|---|
-| Hosting | Vercel free tier | Self-hosted VM | Fastest path for reviewer click-through |
+| Hosting | GitHub Pages (Actions) | Self-hosted VM | Same repo as submission; auto-deploy on push; no extra accounts |

@@ -1,31 +1,36 @@
-# Deploy Task 1 UI
+# Deploy Task 1 UI — GitHub Pages
 
-## Option A — Vercel (recommended for private repo submission)
+Task 1 is deployed automatically via [`.github/workflows/deploy-task1.yml`](../.github/workflows/deploy-task1.yml).
 
-1. Push this repository to GitHub.
-2. Open [https://vercel.com/new](https://vercel.com/new) and import the repo.
-3. Set **Root Directory** to `task1-ui`.
-4. Keep defaults:
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-5. Deploy, then copy the production URL into the root `README.md` and the submission form.
+## One-time setup
 
-CLI alternative (after `npx vercel login`):
+1. Make the repository **public** (or keep private if you have GitHub Pro — Pages works on private repos with Pro).
+2. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+3. Push to `main` (or run **Actions → Deploy Task1 UI → Run workflow**).
 
-```bash
-cd task1-ui
-npx vercel --prod
+## Live URL
+
+```
+https://andyuneducated.github.io/ai-model-quality-challenge/
 ```
 
-## Option B — GitHub Pages (public repo only)
+Update the root `README.md` and submission form if the URL differs.
 
-1. In GitHub repo **Settings → Pages**, set source to **GitHub Actions**.
-2. Push to `main`. Workflow `.github/workflows/deploy-task1.yml` builds and deploys.
-3. Live URL format: `https://<username>.github.io/<repo-name>/`
-4. For project pages, set repo variable or edit workflow env `VITE_BASE_PATH=/<repo-name>/`.
+## How it works
+
+- Workflow builds `task1-ui` with `VITE_BASE_PATH=/<repo-name>/` so assets resolve under the project path.
+- Artifact uploads to GitHub Pages via `actions/deploy-pages`.
 
 ## Verify after deploy
 
-- Upload 2+ `.xlsx` files from `perf_data.zip`
+- Open the live URL and upload 2+ `.xlsx` files from `perf_data.zip`
 - Confirm comparison chart/table renders
 - Switch Customer / Internal tabs
+
+## Local preview (same base path as Pages)
+
+```bash
+cd task1-ui
+VITE_BASE_PATH=/ai-model-quality-challenge/ npm run build
+npm run preview
+```

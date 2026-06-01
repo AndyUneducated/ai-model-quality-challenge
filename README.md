@@ -1,8 +1,8 @@
 # AI Engineer — Model Quality & Performance Challenge (Submission)
 
-**Task 1 Live URL:** `https://REPLACE_WITH_YOUR_VERCEL_URL`
+**Task 1 Live URL:** [https://andyuneducated.github.io/ai-model-quality-challenge/](https://andyuneducated.github.io/ai-model-quality-challenge/)
 
-![verify](https://github.com/YOUR_GITHUB_USER/YOUR_REPO/actions/workflows/verify.yml/badge.svg)
+![verify](https://github.com/AndyUneducated/ai-model-quality-challenge/actions/workflows/verify.yml/badge.svg)
 
 This repository contains a complete submission for Cerebras Task 1 (Performance UI) and Task 2 (evalscope benchmark pruning).
 
@@ -69,13 +69,13 @@ npm run test
 npm run test:e2e
 ```
 
-### Deploy to Vercel (free)
+### Deploy (GitHub Pages)
 
-1. Import repo in Vercel
-2. Root directory: `task1-ui`
-3. Build: `npm run build`
-4. Output: `dist`
-5. Paste deployed URL above and in submission form
+Push to `main` triggers [`.github/workflows/deploy-task1.yml`](./.github/workflows/deploy-task1.yml).
+
+One-time: repo **Settings → Pages → Source: GitHub Actions**.
+
+Details: [docs/DEPLOY_TASK1.md](./docs/DEPLOY_TASK1.md)
 
 Features:
 
