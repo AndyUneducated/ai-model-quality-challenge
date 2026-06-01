@@ -1,0 +1,2 @@
+[console_scripts]
+evalscope-compare-runs = evalscope_ext.tools.compare_runs:main

@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.DS_Store
+__pycache__/
+*.pyc
+.pytest_cache/
+.env
+task1-ui/playwright-report/
+task1-ui/test-results/

@@ -1,0 +1,99 @@
+{
+  "total_samples": 660,
+  "selected_samples": 44,
+  "prune_ratio": 0.05,
+  "validation": {
+    "low_text_prior_encoder_sensitivity": 0.14272727272727273,
+    "high_text_prior_encoder_sensitivity": 0.0,
+    "selected_encoder_sensitivity": 0.1409090909090909,
+    "original_minus_perturbed_selected": 0.17613636363636365,
+    "probe_prefers_image_dependent_samples": true
+  },
+  "control_conditions": [
+    "text_only",
+    "original_image",
+    "perturbed_image"
+  ],
+  "top_probe_examples": [
+    {
+      "index": 2,
+      "subject": "unknown",
+      "text_prior_score": 0.2,
+      "original_score": 1.0,
+      "perturbed_score": 0.75,
+      "encoder_sensitivity": 0.2
+    },
+    {
+      "index": 4,
+      "subject": "unknown",
+      "text_prior_score": 0.2,
+      "original_score": 1.0,
+      "perturbed_score": 0.75,
+      "encoder_sensitivity": 0.2
+    },
+    {
+      "index": 2,
+      "subject": "unknown",
+      "text_prior_score": 0.2,
+      "original_score": 1.0,
+      "perturbed_score": 0.75,
+      "encoder_sensitivity": 0.2
+    },
+    {
+      "index": 2,
+      "subject": "unknown",
+      "text_prior_score": 0.2,
+      "original_score": 1.0,
+      "perturbed_score": 0.75,
+      "encoder_sensitivity": 0.2
+    },
+    {
+      "index": 4,
+      "subject": "unknown",
+      "text_prior_score": 0.2,
+      "original_score": 1.0,
+      "perturbed_score": 0.75,
+      "encoder_sensitivity": 0.2
+    },
+    {
+      "index": 2,
+      "subject": "unknown",
+      "text_prior_score": 0.2,
+      "original_score": 1.0,
+      "perturbed_score": 0.75,
+      "encoder_sensitivity": 0.2
+    },
+    {
+      "index": 4,
+      "subject": "unknown",
+      "text_prior_score": 0.2,
+      "original_score": 1.0,
+      "perturbed_score": 0.75,
+      "encoder_sensitivity": 0.2
+    },
+    {
+      "index": 2,
+      "subject": "unknown",
+      "text_prior_score": 0.2,
+      "original_score": 1.0,
+      "perturbed_score": 0.75,
+      "encoder_sensitivity": 0.2
+    },
+    {
+      "index": 4,
+      "subject": "unknown",
+      "text_prior_score": 0.2,
+      "original_score": 1.0,
+      "perturbed_score": 0.75,
+      "encoder_sensitivity": 0.2
+    },
+    {
+      "index": 4,
+      "subject": "unknown",
+      "text_prior_score": 0.2,
+      "original_score": 1.0,
+      "perturbed_score": 0.75,
+      "encoder_sensitivity": 0.2
+    }
+  ]
+}

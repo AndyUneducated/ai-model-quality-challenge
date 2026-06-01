@@ -1,0 +1,52 @@
+Metadata-Version: 2.4
+Name: evalscope-ext
+Version: 0.1.0
+Summary: Benchmark pruning and encoder probe extensions for evalscope
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.26
+Requires-Dist: scipy>=1.11
+Requires-Dist: pandas>=2.1
+Requires-Dist: pydantic>=2.6
+Requires-Dist: matplotlib>=3.8
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: pytest-cov>=4.1; extra == "dev"
+Provides-Extra: evalscope
+Requires-Dist: evalscope>=1.0.0; extra == "evalscope"
+
+# evalscope_ext
+
+Benchmark pruning extension developed against evalscope commit:
+
+`e9d42d8b6a8dcb937e042ba905e36eb05171ae0d`
+
+## Install
+
+```bash
+pip install -e ./evalscope_ext
+# optional live evalscope integration
+pip install evalscope
+```
+
+## Offline validation (shipped Evals data)
+
+```bash
+python3 -m evalscope_ext.tools.generate_artifacts
+python3 -m evalscope_ext.tools.compare_runs --benchmark live_code_bench_v5
+python3 -m evalscope_ext.tools.ablation
+python3 -m evalscope_ext.probe.mmmu_encoder_probe
+pytest evalscope_ext/tests/
+```
+
+## Registered pruned datasets
+
+- `live_code_bench_pruned`
+- `aa_lcr_pruned`
+- `mmmu_encoder_probe_pruned`
+
+Dataset args:
+
+```json
+{"pruning_strategy": "multi_objective", "prune_ratio": 0.1, "seed": 42}
+```

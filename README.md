@@ -1,86 +1,145 @@
-# AI Engineer — Model Quality & Performance Challenge
+# AI Engineer — Model Quality & Performance Challenge (Submission)
 
-Welcome, and thanks for taking the time. This challenge has two independent tasks.
+**Task 1 Live URL:** `https://REPLACE_WITH_YOUR_VERCEL_URL`
 
-Read each task's spec in full before starting. Each lists hard requirements and a
-set of **forbidden trivial baselines** that will not pass the rubric.
+![verify](https://github.com/YOUR_GITHUB_USER/YOUR_REPO/actions/workflows/verify.yml/badge.svg)
 
----
+This repository contains a complete submission for Cerebras Task 1 (Performance UI) and Task 2 (evalscope benchmark pruning).
 
-## What's in this repo
+## Quick verification (reviewers)
 
-| Path | What it is |
+```bash
+./reproduce.sh
+```
+
+Or:
+
+```bash
+make verify
+```
+
+Evidence outputs:
+
+- `artifacts/scorecard.json`
+- `artifacts/task2/compare_summary.json`
+- `artifacts/task2/ablation.json`
+- `artifacts/task2/encoder_probe_validation.json`
+
+See also: [EVALUATION_FOR_REVIEWERS.md](./EVALUATION_FOR_REVIEWERS.md), [CLAIMS.md](./CLAIMS.md)
+
+## Repository layout
+
+| Path | Description |
 |---|---|
-| `Task1_Performance.md` | Task 1 spec — performance UI for customer + internal audiences |
-| `Task2_Model_Quality.md` | Task 2 spec — benchmark/eval pruning inside `evalscope` |
-| `perf_data.zip` | Task 1 data — perf projections, Models A–K × 7 traffic profiles (`.xlsx`) |
-| `Evals/` | Task 2 data — model outputs (`predictions/`) + per-sample scores (`reviews/`) for LiveCodeBench, AA-LCR, MMMU |
+| `task1-ui/` | React + Vite + TypeScript performance UI |
+| `evalscope_ext/` | evalscope pruning/probe extension + tests |
+| `docs/` | Handouts, methodology, requirement traceability |
+| `artifacts/` | Generated validation outputs |
 
-> **Git LFS:** the files under `Evals/` are stored via [Git LFS](https://git-lfs.github.com/).
-> Install it (`git lfs install`) before cloning, or the `.jsonl` files will appear as
-> small pointer stubs instead of the real data.
+## Architecture
+
+```mermaid
+flowchart LR
+  xlsxUpload[XlsxUpload] --> parser[ClientParser]
+  parser --> customerView[CustomerDecisionView]
+  parser --> internalView[InternalSanityView]
+  parser --> compareView[ComparisonView]
+  evalData[EvalsJsonl] --> pruner[MultiObjectivePruner]
+  pruner --> compareTool[CompareRunsTool]
+  compareTool --> scorecard[ScorecardArtifacts]
+```
 
 ---
 
-## The two tasks
+## Task 1 — Performance UI
 
-### Task 1 — Performance UI for Customer and Product
-Turn an internal `.xlsx` perf projection sheet into something two audiences can act on:
-a customer/PM who needs a **go/no-go** signal, and an internal engineer who needs to
-**sanity-check** a projection. See [`Task1_Performance.md`](./Task1_Performance.md).
+### Run locally
 
-Run contract: document your own install and launch steps in your README — a reviewer
-will clone and follow them. Your choice of framework and packaging. **Also deploy it:**
-ship a publicly reachable URL (a free host is fine — Vercel, Netlify, Cloudflare Pages,
-GitHub Pages, …) so a reviewer can click through without cloning, and let them **upload
-one or more perf sweeps to render and compare the views live** (we'll test it with a new
-model). See [`Task1_Performance.md`](./Task1_Performance.md#deploying-for-free).
+```bash
+cd task1-ui
+npm ci
+npm run dev
+```
 
-### Task 2 — Benchmark Compression for a Real Customer
-Prune coding (LiveCodeBench), long-context (AA-LCR), and (forward-looking) multimodal
-(MMMU) benchmarks to the smallest sample set that still gives a useful good-or-not
-signal. Your pruner **must live inside [`evalscope`](https://github.com/modelscope/evalscope)**
-as an upstream-quality extension. See [`Task2_Model_Quality.md`](./Task2_Model_Quality.md).
+Build/test:
 
-Run contract:
+```bash
+npm run build
+npm run test
+npm run test:e2e
+```
+
+### Deploy to Vercel (free)
+
+1. Import repo in Vercel
+2. Root directory: `task1-ui`
+3. Build: `npm run build`
+4. Output: `dist`
+5. Paste deployed URL above and in submission form
+
+Features:
+
+- Upload one/many `.xlsx` sweeps (client-side parsing)
+- Side-by-side model comparison
+- Customer go/no-go + internal anomaly checks
+- Data-driven model size / profile use-case inference panel
+- No hard-coded model list (supports unseen `Model L`)
+
+Details: [task1-ui/README.md](./task1-ui/README.md)
+
+---
+
+## Task 2 — Benchmark Compression (evalscope extension)
+
+**evalscope base SHA:** `e9d42d8b6a8dcb937e042ba905e36eb05171ae0d`
+
+Install:
+
+```bash
+cd evalscope_ext
+pip install -e ".[dev]"
+```
+
+Run contract-compatible flow:
+
 ```bash
 evalscope eval --model <model> --datasets live_code_bench --output ./results_full/
 evalscope eval --model <model> --datasets live_code_bench_pruned \
-    --dataset-args '{"pruning_strategy": "your_strategy", "prune_ratio": 0.1}' \
-    --output ./results_pruned/
-python -m evalscope_ext.tools.compare_runs --full ./results_full/ --pruned ./results_pruned/
+  --dataset-args '{"pruning_strategy": "multi_objective", "prune_ratio": 0.1}' \
+  --output ./results_pruned/
+python3 -m evalscope_ext.tools.compare_runs --full ./results_full/ --pruned ./results_pruned/
 ```
 
-Each task's spec defines exactly what to submit (code, written handouts, and/or video).
+Offline validation with shipped `Evals/` data:
+
+```bash
+python3 -m evalscope_ext.tools.generate_artifacts
+python3 -m evalscope_ext.tools.ablation
+python3 -m evalscope_ext.probe.mmmu_encoder_probe
+pytest evalscope_ext/tests/
+```
+
+Details: [evalscope_ext/README.md](./evalscope_ext/README.md), [docs/task2_methodology.md](./docs/task2_methodology.md)
 
 ---
 
-## How to submit
+## Submission docs
 
-**Submit via this form:** https://docs.google.com/forms/d/e/1FAIpQLSdwLrRJkKUgTd2sisyJO10VSf1-1vJ3NIywV5HtMlUSc7ijMw/viewform?usp=publish-editor
+- Handout A (technical): [docs/handout_a.md](./docs/handout_a.md)
+- Handout B (mixed audience): [docs/handout_b.md](./docs/handout_b.md)
+- Requirement traceability: [docs/requirement_traceability.md](./docs/requirement_traceability.md)
+- Decision log: [docs/decision_log.md](./docs/decision_log.md)
+- Limitations: [LIMITATIONS.md](./LIMITATIONS.md)
 
-Your submission **must** include:
+## Video walkthroughs
 
-1. **A private GitHub repo** with your code.
-   - Keep it **private**, and grant access to the reviewers listed in the form.
-   - Make it runnable from the instructions above — a reviewer will clone and run it.
-   - For Task 2, pin the `evalscope` commit SHA you developed against in your fork's README.
+Add links after recording:
 
-2. **A live URL for the Task 1 UI** — **required**.
-   - A publicly reachable link to your deployed frontend where a reviewer can **upload one
-     or more perf sweeps, compare them, and get the views** (the shipped sweeps may be
-     pre-loaded as a sample).
-   - Put it at the top of your README **and paste it into the submission form above**.
-   - A free host is expected — see
-     [`Task1_Performance.md`](./Task1_Performance.md#deploying-for-free) for options.
-   - The repo stays private; only the deployed UI is public (the perf data is synthetic).
+- Task 1 video: `<YOUR_TASK1_VIDEO_URL>`
+- Task 2 video: `<YOUR_TASK2_VIDEO_URL>`
 
-3. **Video walkthrough(s)** explaining your work — **required**.
-   - Task 1: a ≤5-minute video covering the questions in `Task1_Performance.md`
-     (what you cut and why, framework chosen vs ruled out, your assumptions, and your
-     read on the model sizes / profile use-cases).
-   - Task 2: walk through your pruning approach and the trade-offs in your handouts.
-   - Link the video(s) in the form (Loom, Drive, YouTube-unlisted, etc.). Make sure
-     reviewers can actually open the link.
+Scripts: [docs/video_script_task1.md](./docs/video_script_task1.md), [docs/video_script_task2.md](./docs/video_script_task2.md)
 
-A submission without a private repo, a live Task 1 URL, **and** video(s) is incomplete.
+---
+
+Original challenge instructions remain in [Task1_Performance.md](./Task1_Performance.md) and [Task2_Model_Quality.md](./Task2_Model_Quality.md).
