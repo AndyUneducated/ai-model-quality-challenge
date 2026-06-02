@@ -14,9 +14,9 @@
 
 ## Task 2 Part B
 
-- Full 12K MMMU probing in this repo uses shipped reference behavior plus encoder-sensitivity heuristics; live OpenAI multimodal calls were not executed in offline mode.
-- Text-only control scores are estimated from question/options structure when explicit text-only runs are unavailable.
-- Probe selection should be recalibrated when a live VLM endpoint is available.
+- Offline validation uses real images from shipped MMMU reviews plus Pillow perturbations (downscale/blur/jpeg) to estimate encoder stress; live text-only / original / perturbed scoring requires `--mode live` and an API key.
+- Full 12K MMMU on HuggingFace (`MMMU/MMMU`) is supported by the same probe code path; this repo validates on the 660 shipped reference rows.
+- Probe selection should be recalibrated on the target customer VLM when a production endpoint is available.
 
 ## Minimum sample size guidance
 

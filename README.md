@@ -25,7 +25,7 @@ Evidence outputs:
 - `artifacts/task2/ablation.json`
 - `artifacts/task2/encoder_probe_validation.json`
 
-See also: [EVALUATION_FOR_REVIEWERS.md](./EVALUATION_FOR_REVIEWERS.md), [CLAIMS.md](./CLAIMS.md)
+See also: [EVALUATION_FOR_REVIEWERS.md](./EVALUATION_FOR_REVIEWERS.md), [CLAIMS.md](./CLAIMS.md), [docs/DATA_SETUP.md](./docs/DATA_SETUP.md)
 
 ## Repository layout
 
@@ -79,11 +79,15 @@ Details: [docs/DEPLOY_TASK1.md](./docs/DEPLOY_TASK1.md)
 
 Features:
 
-- Upload one/many `.xlsx` sweeps (client-side parsing)
+- **11 shipped perf models (A–K) pre-loaded on open** — results render with no upload required
+- Upload one/many additional `.xlsx` sweeps (client-side parsing)
 - Side-by-side model comparison
 - Customer go/no-go + internal anomaly checks
 - Data-driven model size / profile use-case inference panel
 - No hard-coded model list (supports unseen `Model L`)
+
+The pre-loaded set is the shipped `perf_data.zip`, parsed through the same code path as
+uploads. To refresh it after a perf-dataset update: `cd task1-ui && npm run build:default-perf`.
 
 Details: [task1-ui/README.md](./task1-ui/README.md)
 
@@ -110,13 +114,21 @@ evalscope eval --model <model> --datasets live_code_bench_pruned \
 python3 -m evalscope_ext.tools.compare_runs --full ./results_full/ --pruned ./results_pruned/
 ```
 
-Offline validation with shipped `Evals/` data:
+Offline validation with shipped `Evals/` data (download from the Google Drive link in the
+challenge email if `git lfs pull` fails due to LFS quota):
 
 ```bash
 python3 -m evalscope_ext.tools.generate_artifacts
 python3 -m evalscope_ext.tools.ablation
 python3 -m evalscope_ext.probe.mmmu_encoder_probe
 pytest evalscope_ext/tests/
+```
+
+Live MMMU encoder probe (OpenAI-compatible VLM endpoint; requires `OPENAI_API_KEY`):
+
+```bash
+cd evalscope_ext && pip install -e ".[probe]"
+python3 -m evalscope_ext.probe.mmmu_encoder_probe --mode live --model gpt-4o-mini --max-samples 30
 ```
 
 Details: [evalscope_ext/README.md](./evalscope_ext/README.md), [docs/task2_methodology.md](./docs/task2_methodology.md)

@@ -1,12 +1,16 @@
 {
+  "mode": "offline_image_perturbation",
+  "pil_available": true,
   "total_samples": 660,
+  "samples_with_images": 660,
   "selected_samples": 44,
   "prune_ratio": 0.05,
   "validation": {
-    "low_text_prior_encoder_sensitivity": 0.14272727272727273,
+    "low_text_prior_encoder_sensitivity": 0.39888837255777493,
     "high_text_prior_encoder_sensitivity": 0.0,
-    "selected_encoder_sensitivity": 0.1409090909090909,
-    "original_minus_perturbed_selected": 0.17613636363636365,
+    "selected_encoder_sensitivity": 0.3704259004367286,
+    "selected_visual_degradation": 0.4445576781353522,
+    "original_minus_perturbed_selected": 0.2705907054569839,
     "probe_prefers_image_dependent_samples": true
   },
   "control_conditions": [
@@ -14,86 +18,97 @@
     "original_image",
     "perturbed_image"
   ],
+  "live_probe_command": "python3 -m evalscope_ext.probe.mmmu_encoder_probe --mode live --model <vlm> --max-samples 30",
   "top_probe_examples": [
     {
-      "index": 2,
-      "subject": "unknown",
-      "text_prior_score": 0.2,
-      "original_score": 1.0,
-      "perturbed_score": 0.75,
-      "encoder_sensitivity": 0.2
-    },
-    {
       "index": 4,
-      "subject": "unknown",
-      "text_prior_score": 0.2,
+      "subject": "Architecture and Engineering",
+      "text_prior_score": 0.05,
+      "visual_degradation": 0.7804985041452092,
       "original_score": 1.0,
-      "perturbed_score": 0.75,
-      "encoder_sensitivity": 0.2
+      "perturbed_score": 0.25852642106205137,
+      "encoder_sensitivity": 0.7043998999910511
     },
     {
       "index": 2,
-      "subject": "unknown",
-      "text_prior_score": 0.2,
-      "original_score": 1.0,
-      "perturbed_score": 0.75,
-      "encoder_sensitivity": 0.2
+      "subject": "Economics",
+      "text_prior_score": 0.05,
+      "visual_degradation": 0.7159169206103961,
+      "original_score": 0.0,
+      "perturbed_score": 0.0,
+      "encoder_sensitivity": 0.6801210745798763
     },
     {
       "index": 2,
-      "subject": "unknown",
-      "text_prior_score": 0.2,
-      "original_score": 1.0,
-      "perturbed_score": 0.75,
-      "encoder_sensitivity": 0.2
+      "subject": "Manage",
+      "text_prior_score": 0.12,
+      "visual_degradation": 0.7685511179422506,
+      "original_score": 0.0,
+      "perturbed_score": 0.0,
+      "encoder_sensitivity": 0.6763249837891806
     },
     {
       "index": 4,
-      "subject": "unknown",
-      "text_prior_score": 0.2,
+      "subject": "Chemistry",
+      "text_prior_score": 0.12,
+      "visual_degradation": 0.765437610783828,
+      "original_score": 0.0,
+      "perturbed_score": 0.0,
+      "encoder_sensitivity": 0.6735850974897687
+    },
+    {
+      "index": 4,
+      "subject": "Geography",
+      "text_prior_score": 0.12,
+      "visual_degradation": 0.8518397436815135,
       "original_score": 1.0,
-      "perturbed_score": 0.75,
-      "encoder_sensitivity": 0.2
+      "perturbed_score": 0.2503810255602681,
+      "encoder_sensitivity": 0.6596646975069641
     },
     {
       "index": 2,
-      "subject": "unknown",
-      "text_prior_score": 0.2,
+      "subject": "Finance",
+      "text_prior_score": 0.05,
+      "visual_degradation": 0.7266946935861269,
       "original_score": 1.0,
-      "perturbed_score": 0.75,
-      "encoder_sensitivity": 0.2
-    },
-    {
-      "index": 4,
-      "subject": "unknown",
-      "text_prior_score": 0.2,
-      "original_score": 1.0,
-      "perturbed_score": 0.75,
-      "encoder_sensitivity": 0.2
+      "perturbed_score": 0.30964004109317944,
+      "encoder_sensitivity": 0.6558419609614795
     },
     {
       "index": 2,
-      "subject": "unknown",
-      "text_prior_score": 0.2,
+      "subject": "Architecture and Engineering",
+      "text_prior_score": 0.12,
+      "visual_degradation": 0.8290133108969524,
       "original_score": 1.0,
-      "perturbed_score": 0.75,
-      "encoder_sensitivity": 0.2
+      "perturbed_score": 0.2704682864106819,
+      "encoder_sensitivity": 0.6419879079586
+    },
+    {
+      "index": 2,
+      "subject": "Chemistry",
+      "text_prior_score": 0.12,
+      "visual_degradation": 0.7205306078910629,
+      "original_score": 0.0,
+      "perturbed_score": 0.0,
+      "encoder_sensitivity": 0.6340669349441354
     },
     {
       "index": 4,
-      "subject": "unknown",
-      "text_prior_score": 0.2,
-      "original_score": 1.0,
-      "perturbed_score": 0.75,
-      "encoder_sensitivity": 0.2
+      "subject": "Accounting",
+      "text_prior_score": 0.12,
+      "visual_degradation": 0.7112868833325992,
+      "original_score": 0.0,
+      "perturbed_score": 0.0,
+      "encoder_sensitivity": 0.6259324573326872
     },
     {
-      "index": 4,
-      "subject": "unknown",
-      "text_prior_score": 0.2,
+      "index": 2,
+      "subject": "Energy and Power",
+      "text_prior_score": 0.12,
+      "visual_degradation": 0.8033661295074902,
       "original_score": 1.0,
-      "perturbed_score": 0.75,
-      "encoder_sensitivity": 0.2
+      "perturbed_score": 0.29303780603340857,
+      "encoder_sensitivity": 0.6221267306906004
     }
   ]
 }

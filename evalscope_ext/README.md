@@ -22,6 +22,17 @@ python3 -m evalscope_ext.probe.mmmu_encoder_probe
 pytest evalscope_ext/tests/
 ```
 
+## Live MMMU encoder probe (OpenAI-compatible API)
+
+```bash
+pip install -e ".[probe]"
+export OPENAI_API_KEY=...
+python3 -m evalscope_ext.probe.mmmu_encoder_probe --mode live --model gpt-4o-mini --max-samples 30
+```
+
+Runs three controls per sample: **text-only**, **original image**, and **perturbed image** (blur/downscale/jpeg/grayscale).
+Offline mode uses real images from shipped `Evals/MMMU/reviews` with Pillow perturbations (no API required).
+
 ## Record walkthrough video (optional)
 
 Automated slide walkthrough with captions (no microphone):

@@ -14,10 +14,12 @@ dependencies = [
   "pandas>=2.1",
   "pydantic>=2.6",
   "matplotlib>=3.8",
+  "pillow>=10.0",
 ]
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0", "pytest-cov>=4.1"]
+probe = ["openai>=1.0"]
 evalscope = ["evalscope>=1.0.0"]
 
 [project.scripts]

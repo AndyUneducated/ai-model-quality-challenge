@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:e2e": "playwright test",
+    "build:default-perf": "node scripts/build_default_perf.mjs",
     "record:video": "node scripts/record_submission_video.mjs",
     "record:video:task2": "node scripts/record_task2_video.mjs"
   },

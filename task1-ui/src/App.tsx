@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import './App.css';
 import { UploadPanel } from './components/UploadPanel';
 import { CustomerDecisionView } from './components/CustomerDecisionView';
@@ -7,6 +7,7 @@ import { ComparisonView } from './components/ComparisonView';
 import { InferencePanel } from './components/InferencePanel';
 import { AssumptionPanel, ThresholdPanel } from './components/ThresholdPanel';
 import { parseSweepFile } from './lib/parseSweep';
+import { loadDefaultSweeps } from './lib/defaultData';
 import { DEFAULT_THRESHOLDS } from './lib/types';
 import type { ParsedSweep, Thresholds } from './lib/types';
 
@@ -18,6 +19,37 @@ function App() {
   const [tab, setTab] = useState<AudienceTab>('customer');
   const [isParsing, setIsParsing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isLoadingDefaults, setIsLoadingDefaults] = useState(true);
+  const [defaultsError, setDefaultsError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    loadDefaultSweeps()
+      .then((defaults) => {
+        if (cancelled) return;
+        setSweeps((prev) => {
+          if (prev.length) return prev;
+          return defaults;
+        });
+      })
+      .catch((err) => {
+        if (cancelled) return;
+        setDefaultsError(
+          err instanceof Error ? err.message : 'Could not load the pre-loaded perf models.',
+        );
+      })
+      .finally(() => {
+        if (!cancelled) setIsLoadingDefaults(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const modelCount = useMemo(
+    () => new Set(sweeps.map((s) => s.identity.modelId)).size,
+    [sweeps],
+  );
 
   const sortedSweeps = useMemo(
     () =>
@@ -53,16 +85,27 @@ function App() {
       <header className="hero">
         <div>
           <p className="eyebrow">Cerebras Perf Projection Explorer</p>
-          <h1>Upload sweeps. Compare models. Decide faster.</h1>
-          <p>Client-side parsing only — no rebuild required for new models like Model L.</p>
+          <h1>Compare models. Decide faster.</h1>
+          <p>
+            {modelCount > 0
+              ? `${modelCount} perf models pre-loaded — upload more .xlsx sweeps anytime (e.g. an unseen Model L).`
+              : 'Client-side parsing only — no rebuild required for new models like Model L.'}
+          </p>
         </div>
       </header>
 
       <UploadPanel onFilesSelected={handleFilesSelected} isParsing={isParsing} error={error} />
+      {defaultsError ? (
+        <p className="error">Pre-loaded data unavailable ({defaultsError}). You can still upload sweeps manually.</p>
+      ) : null}
       <ThresholdPanel thresholds={thresholds} onChange={setThresholds} />
       <AssumptionPanel />
 
-      {sortedSweeps.length ? (
+      {isLoadingDefaults && !sortedSweeps.length ? (
+        <section className="panel empty-state">
+          <p>Loading pre-loaded perf models…</p>
+        </section>
+      ) : sortedSweeps.length ? (
         <>
           <ComparisonView sweeps={sortedSweeps} thresholds={thresholds} />
           <InferencePanel sweeps={sortedSweeps} />
