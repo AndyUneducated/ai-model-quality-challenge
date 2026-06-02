@@ -90,6 +90,21 @@
       </div>
     </section>
 
+    <section id="scene-registry" class="scene">
+      <p class="eyebrow">evalscope integration</p>
+      <h1>Universal pruned adapter — not hardcoded to one benchmark</h1>
+      <div class="panel">
+        <ul>
+          <li><code>PRUNED_BENCHMARKS</code> registry drives all pruned datasets from one adapter</li>
+          <li><code>live_code_bench_pruned</code> → LiveCodeBench v5 (10% default)</li>
+          <li><code>aa_lcr_pruned</code> → AA-LCR (20% default, same registration pattern)</li>
+          <li><code>select_indices()</code> is benchmark-agnostic — only data loading is per-benchmark</li>
+        </ul>
+        <pre>evalscope eval --datasets aa_lcr_pruned \
+  --dataset-args '{"pruning_strategy":"multi_objective","prune_ratio":0.2}'</pre>
+      </div>
+    </section>
+
     <section id="scene-part-a" class="scene">
       <p class="eyebrow">Part A</p>
       <h1>Multi-objective pruning inside evalscope</h1>
@@ -180,13 +195,14 @@
     </section>
 
     <section id="scene-part-b" class="scene">
-      <p class="eyebrow">Part B</p>
-      <h1>MMMU encoder probe (~12K design, 660 ref samples)</h1>
+      <p class="eyebrow">Part B · working code</p>
+      <h1>MMMU encoder probe — runnable, not design-only</h1>
       <div class="panel">
         <ul>
+          <li>Shipped module: <code>evalscope_ext.probe.mmmu_encoder_probe</code> (offline + live modes)</li>
           <li>Control conditions: <code>text_only</code> · <code>original_image</code> · <code>perturbed_image</code></li>
-          <li>Select probes with high encoder sensitivity, low text-only solvability</li>
-          <li>5% probe ratio on reference set → 44 samples</li>
+          <li>Pillow perturbations on real images; live path uses OpenAI-compatible VLM API</li>
+          <li>5% probe ratio on 660 reference samples → 44 selected · scales to full ~12K HF dataset</li>
         </ul>
         <div class="metric-row">
           <div class="metric"><strong>0.141</strong><span>Selected encoder sensitivity</span></div>
@@ -201,9 +217,10 @@
       <p class="eyebrow">Reproduce</p>
       <h1>One-command reviewer verification</h1>
       <div class="panel">
-        <pre>git clone &lt;repo&gt; && cd ai-model-quality-challenge
+        <pre>git clone &lt;private-repo&gt; && cd ai-model-quality-challenge
+git lfs pull   # or Evals/ from Google Drive if LFS quota fails
 ./reproduce.sh
-# → tests + artifacts/task2/compare_summary.json + scorecard.json</pre>
+# Task1: npm test + build · Task2: pytest + artifacts/scorecard.json</pre>
         <table style="margin-top:16px">
           <thead><tr><th>Check</th><th>Threshold</th></tr></thead>
           <tbody>

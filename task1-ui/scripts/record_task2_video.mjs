@@ -21,50 +21,57 @@ const MAX_RUNTIME_MS = 4 * 60 * 1000 + 45 * 1000;
 const SCENES = [
   {
     scene: 'intro',
-    ms: 16000,
+    ms: 14000,
     caption:
-      'Task 2 — A prospect needs a fast answer: is this model good enough for coding and long-context reasoning? Full benchmarks are too expensive; we prune inside evalscope while preserving go/no-go signal.',
+      'Task 2 — A prospect needs a fast answer: is this model good enough for coding and long-context reasoning? Full benchmarks are too expensive; we prune while preserving go/no-go signal. Both Task 1 and Task 2 are required for submission.',
+  },
+  {
+    scene: 'registry',
+    ms: 18000,
+    caption:
+      'Interviewer clarification: aa_lcr_pruned is registered the same way as live_code_bench_pruned. One universal PRUNED_BENCHMARKS adapter — not hardcoded to a single benchmark.',
   },
   {
     scene: 'part-a',
-    ms: 18000,
+    ms: 16000,
     caption:
-      'Part A: multi-objective pruning — coverage + disagreement + difficulty + greedy facility-location. Integrated as live_code_bench_pruned and aa_lcr_pruned datasets. Not random or top-k hardest (forbidden baselines).',
+      'Part A: multi-objective pruning — coverage + disagreement + difficulty + facility-location greedy. Forbidden baselines: random sampling and top-k hardest only.',
   },
   {
     scene: 'results',
-    ms: 22000,
+    ms: 20000,
     caption:
-      'Validation on shipped models: LiveCodeBench keeps 10% (90% cost cut), AA-LCR keeps 20% (judge noise). Kendall τ = 1.0 and decision agreement = 100% for both — see compare_summary.json.',
+      'Validation on shipped Evals/: LiveCodeBench keeps 10% (90% cost cut), AA-LCR keeps 20% (judge noise). Kendall τ = 1.0 and decision agreement = 100% for both — compare_summary.json.',
   },
   {
     scene: 'charts',
     ms: 14000,
-    caption: 'Full vs pruned scores track closely across gpt-oss-120b, kimi-k2.5, and minimax-m2.5 — ranking and tiered decisions preserved.',
+    caption:
+      'Full vs pruned scores track closely across gpt-oss-120b, kimi-k2.5, and minimax-m2.5 — ranking and tiered go/no-go decisions preserved on both benchmarks.',
   },
   {
     scene: 'ablation',
-    ms: 18000,
+    ms: 16000,
     caption:
-      'Ablation: random baseline collapses decision agreement to 33%. Hardest-only keeps rank but fails go/no-go. Our selector optimizes for the customer conversation, not accuracy alone.',
+      'Ablation vs forbidden baselines: random collapses decision agreement to 33%. Hardest-only keeps rank but fails go/no-go. Our selector optimizes for the customer conversation.',
   },
   {
     scene: 'part-b',
     ms: 20000,
     caption:
-      'Part B: MMMU encoder probe for multimodal roadmap. Perturbation controls (text-only vs original vs perturbed image) prefer image-dependent samples — not generic text solvable items.',
+      'Part B (working code required): MMMU encoder probe with text-only / original / perturbed controls. Real image perturbations + live VLM path — not a design proposal alone.',
   },
   {
     scene: 'reproduce',
     ms: 18000,
     caption:
-      'Reviewers run ./reproduce.sh — pytest, regenerate artifacts, build scorecard.json. Pass if Kendall τ ≥ 0.9 and decision agreement = 1.0.',
+      'Reviewers: ./reproduce.sh regenerates pytest results, compare_summary.json, ablation.json, encoder_probe_validation.json, and scorecard.json. Evals/ also on Google Drive if Git LFS fails.',
   },
   {
     scene: 'close',
     ms: 12000,
     caption:
-      'Code + Handout A/B in repo · evalscope SHA pinned · LIMITATIONS.md documents judge noise and offline Part B. End of Task 2 walkthrough.',
+      'Invite sophies-cerebras, danielkim-cerebras, kevint-cerebras to your private repo · Handout A/B + CLAIMS.md · evalscope SHA pinned. End of Task 2 walkthrough.',
   },
 ];
 

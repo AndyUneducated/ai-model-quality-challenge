@@ -6,11 +6,11 @@
   "selected_samples": 44,
   "prune_ratio": 0.05,
   "validation": {
-    "low_text_prior_encoder_sensitivity": 0.39888837255777493,
+    "low_text_prior_encoder_sensitivity": 0.3988883725577749,
     "high_text_prior_encoder_sensitivity": 0.0,
-    "selected_encoder_sensitivity": 0.3704259004367286,
-    "selected_visual_degradation": 0.4445576781353522,
-    "original_minus_perturbed_selected": 0.2705907054569839,
+    "selected_encoder_sensitivity": 0.3704259004367287,
+    "selected_visual_degradation": 0.44455767813535235,
+    "original_minus_perturbed_selected": 0.2705907054569841,
     "probe_prefers_image_dependent_samples": true
   },
   "control_conditions": [
@@ -33,10 +33,10 @@
       "index": 2,
       "subject": "Economics",
       "text_prior_score": 0.05,
-      "visual_degradation": 0.7159169206103961,
+      "visual_degradation": 0.715916920610396,
       "original_score": 0.0,
       "perturbed_score": 0.0,
-      "encoder_sensitivity": 0.6801210745798763
+      "encoder_sensitivity": 0.6801210745798761
     },
     {
       "index": 2,
@@ -69,10 +69,10 @@
       "index": 2,
       "subject": "Finance",
       "text_prior_score": 0.05,
-      "visual_degradation": 0.7266946935861269,
+      "visual_degradation": 0.726694693586127,
       "original_score": 1.0,
-      "perturbed_score": 0.30964004109317944,
-      "encoder_sensitivity": 0.6558419609614795
+      "perturbed_score": 0.30964004109317933,
+      "encoder_sensitivity": 0.6558419609614796
     },
     {
       "index": 2,

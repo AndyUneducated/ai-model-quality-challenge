@@ -1,21 +1,6 @@
 {
-  "claims": [
-    {
-      "requirement_id": "T2-headline",
-      "status": "pass",
-      "metric_value": 1.0,
-      "threshold": 0.9,
-      "evidence_path": "artifacts/task2/compare_summary.json"
-    },
-    {
-      "requirement_id": "T1-upload-parse",
-      "status": "pass",
-      "metric_value": 1,
-      "threshold": 1,
-      "evidence_path": "task1-ui/src/lib/parseSweep.test.ts"
-    }
-  ],
-  "task2": {
+  "task2_headline": {
+    "claim": "10% samples preserve ranking and go/no-go decisions with ~90% cost reduction",
     "live_code_bench_v5": {
       "benchmark": "live_code_bench_v5",
       "prune_ratio": 0.1,
@@ -77,5 +62,5 @@
       "pass_thresholds": true
     }
   },
-  "verify_command": "./reproduce.sh"
+  "thresholds_pass": true
 }

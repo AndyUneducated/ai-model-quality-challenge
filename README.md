@@ -147,8 +147,8 @@ Details: [evalscope_ext/README.md](./evalscope_ext/README.md), [docs/task2_metho
 
 Add links after recording:
 
-- Task 1 video: `<YOUR_TASK1_VIDEO_URL>`
-- Task 2 video: `<YOUR_TASK2_VIDEO_URL>`
+- Task 1 video: [https://youtu.be/FXjD9_sPGjg](https://youtu.be/FXjD9_sPGjg)
+- Task 2 video: [https://youtu.be/OO24ESrNPHw](https://youtu.be/OO24ESrNPHw)
 
 Scripts: [docs/video_script_task1.md](./docs/video_script_task1.md), [docs/video_script_task2.md](./docs/video_script_task2.md)
 
