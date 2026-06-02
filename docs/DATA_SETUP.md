@@ -2,7 +2,11 @@
 
 ## Evals (Task 2)
 
-If `git lfs pull` fails with an LFS budget error, download `Evals/` from the Google Drive link in the challenge email and place it at the repository root:
+`Evals/Part 1/` (LiveCodeBench + AA-LCR) is stored **directly in Git** — a normal clone is enough for Part A.
+
+`Evals/MMMU/` remains on **Git LFS** (`git lfs pull` after clone). If LFS fails, download from the Google Drive link in the challenge email and place files under `Evals/`:
+
+If `git lfs pull` fails with an LFS budget error, download the full `Evals/` tree from the Google Drive link in the challenge email and place it at the repository root:
 
 ```
 ai-model-quality-challenge/
