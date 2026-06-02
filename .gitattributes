@@ -1,1 +1,4 @@
-Evals/**/*.jsonl filter=lfs diff=lfs merge=lfs -text
+# Part 1 eval JSONL is stored in Git directly so reviewers can clone without LFS quota issues.
+Evals/Part?1/** -filter -diff -merge
+# MMMU rows include large embedded images; keep on LFS (one file >100MB).
+Evals/MMMU/**/*.jsonl filter=lfs diff=lfs merge=lfs -text
